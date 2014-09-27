@@ -1,0 +1,108 @@
+TODO
+	View layout of basic foot positions.
+	Left forward.
+	Basic step.
+	Half tempo with guide.
+	Half tempo without guide.
+	Half tempo with guide and all instruments.
+	Half tempo with all instruments.
+	Full tempo with guide.
+	Full tempo without guide.
+	Full tempo with guide and all instruments.
+	Full tempo with all instruments.
+	
+
+Sun 09/21/2014 
+09:02
+
+Salsa Software
+
+View layout of basic foot positions.
+
+Leader:  blue man's shoe footprint.  
+
+Hear salsa percussion beat.
+
+See foot positions with number light up.
+
+Your turn.
+
+Basic step.
+
+1 left forward
+2 right center
+3 left center
+
+5 right back
+6 left center
+7 right center
+
+Tap those foot positions on the same beat.
+
+Half tempo with guide.
+Half tempo without guide.
+Half tempo with guide and all instruments.
+Half tempo with all instruments.
+Full tempo with guide.
+Full tempo without guide.
+Full tempo with guide and all instruments.
+Full tempo with all instruments.
+
+
+In Flash, layout foot positions, one beat per frame (1 to 8), starting on 1.
+Also position buttons at each of these positions.
+Set origin at ball of the foot near toes.
+Play music at known tempo.
+Guide foot tweens between foot position and rotation, using TweenLite.
+Mouse down.  Measure good, early, late or way off.
+Find previous and next target position.  Click was on the button near position.
+
+REFERENCE GAMES
+Osu [Erin McCarty recommended]
+Elite Beat Agents
+Dance Dance Revolution
+Rhythm Revolution
+
+REFERENCE TRAINING
+http://www.salsabeatmachine.org/
+http://www.salsarhythmsoftware.com/visual/
+Latin Rhythms
+http://musescore.com/codystumpo/scores/69780
+La Salsa du Démon
+http://musescore.com/user/27430/scores/49226
+http://www.ruedaconritmo.com/FridaySalsa.pdf
+Level 1-A & 1-B (same for A and B)
+Básico/Son montuno ☐ Llévala pa’bajo ☐ Exhíbela
+☐ Caminamos ☐ Un tarro ☐ Pa’l medio
+☐ Una bulla ☐ Dile que no ☐ Guapea
+Level 1-C & 1-D (same for C and D)
+☐ Guapea ☐ Pásala con las manos
+☐ Dame ☐ Suena ☐ Un fly
+☐ Enchufla y dile que no
+
+http://www.justsalsa.com/salsa/dance/steps/
+
+http://learningsalsa.blogspot.com/2005/11/absolute-beginner-salsa-patterns.html
+http://learntodancewell.com/footdiagrams.html
+http://7stepstosalsadancing.com/diagram.html
+
+Blue and pink foot steps.
+http://www.pinterest.com/pin/528258231263008641
+
+http://users.trytel.com/~ballroom/#SL
+
+http://www.salsaisgood.com/dictionary/Salsa_dictionary.htm
+
+
+Rhythm:
+http://www.salsa-merengue.co.uk/VidTutor/salsatwo/piano/core_montuno_guajeo.html
+
+
+MIDI sound software
+https://sites.google.com/site/sioncenter/downloads
+
+
+Risks
+Clicking mouse, or tapping fingers does not translate to moving feet.
+
+
