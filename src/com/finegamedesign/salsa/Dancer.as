@@ -1,12 +1,14 @@
 package com.finegamedesign.salsa
 {
     import flash.display.MovieClip;
+    import flash.geom.Point;
     import flash.utils.getTimer;
 
     internal final class Dancer
     {
         private var beat:int;
         private var beatLength:int;
+        private var childNames:Array = ["left", "right"];
         private var bpm:int;
         private var diagram:MovieClip;
         private var halfFrameMilliseconds:Number;
@@ -51,6 +53,30 @@ package com.finegamedesign.salsa
             return offset;
         }
 
+        internal function isNear(milliseconds:int, global:Point):Boolean
+        {
+            var distanceMax:Number = 40.0;
+                                     // 80.0;
+            var local:Point = diagram.globalToLocal(global);
+            var near:Boolean = false;
+            var beatIndex:int = getBeat(milliseconds) - 1;
+            var step:Object = schedule[beatIndex];
+            var distance:Number = Number.POSITIVE_INFINITY;
+            for each(var childName:String in childNames)
+            {
+                if (childName in step) {
+                    var childDistance:Number = Point.distance(step[childName], local);
+                    if (childDistance < distance) {
+                        distance = childDistance;
+                    }
+                }
+            }
+            near = distance <= distanceMax;
+            trace("Dancer.isNear: " + near
+                + " distance " + distance);
+            return near;
+        }
+
         internal function isOnBeat(milliseconds:int):Boolean
         {
             var threshold:Number = // 0.125;
@@ -61,6 +87,20 @@ package com.finegamedesign.salsa
                 + " milliseconds " + milliseconds);
             var off:Number = Math.abs(offset);
             return off <= threshold;
+        }
+
+        private function move(previous:Object, diagram:Object, childName:String, 
+                              step:Object):void
+        {
+            if (diagram[childName].x != previous[childName].x 
+             || diagram[childName].y != previous[childName].y) 
+            {
+                step[childName] = new Point(
+                    diagram[childName].x,
+                    diagram[childName].y);
+                previous[childName].x = diagram[childName].x;
+                previous[childName].y = diagram[childName].y;
+            }
         }
 
         /**
@@ -80,36 +120,23 @@ package com.finegamedesign.salsa
             for (var beat:int = 1; beat <= beatLength; beat++) {
                 var step:Object = {millisecond: (beat - 1) * millisecondPerBeat };
                 diagram.gotoAndStop(beat);
-                move(previous, diagram, "left", step);
-                move(previous, diagram, "right", step);
+                for each(var childName:String in childNames) {
+                    move(previous, diagram, childName, step);
+                }
                 schedule.push(step);
             }
             diagram.gotoAndStop(currentFrame);
             return schedule;
         }
 
-        private function move(previous:Object, diagram:Object, childName:String, 
-                              step:Object):void
+        public function update(milliseconds:int)
         {
-            if (diagram[childName].x != previous[childName].x 
-             || diagram[childName].y != previous[childName].y) 
-            {
-                step[childName] = {};
-                step[childName].x = diagram[childName].x;
-                step[childName].y = diagram[childName].y;
-                previous[childName].x = diagram[childName].x;
-                previous[childName].y = diagram[childName].y;
-            }
-        }
-
-        public function update(millisecond:int)
-        {
-            beat = getBeat(millisecond);
+            beat = getBeat(milliseconds);
             if (diagram.currentFrame != beat) {
                 var duration:int = getTimer() - this.startMilliseconds;
                 diagram.gotoAndStop(beat);
                 trace("Dancer.update: beat " + beat 
-                    + " millisecond " + millisecond 
+                    + " milliseconds " + milliseconds
                     + " duration " + duration);
             }
         }

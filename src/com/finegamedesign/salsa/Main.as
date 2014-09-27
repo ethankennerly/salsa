@@ -2,13 +2,11 @@ package com.finegamedesign.salsa
 {
     import flash.display.DisplayObjectContainer;
     import flash.display.MovieClip;
-    import flash.display.SimpleButton;
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.geom.Point;
     import flash.geom.Rectangle;
-    import flash.media.Sound;
-    import flash.media.SoundChannel;
     import flash.utils.getTimer;
 
     import org.flixel.system.input.KeyMouse;
@@ -57,13 +55,21 @@ package com.finegamedesign.salsa
         private function updateStep(milliseconds:int):void
         {
             if (keyMouse.justPressed("MOUSE")) {
-                var x:int = Math.round(keyMouse.target.mouseX);
-                var y:int = Math.round(keyMouse.target.mouseY);
+                mousePoint.x = Math.round(keyMouse.target.mouseX);
+                mousePoint.y = Math.round(keyMouse.target.mouseY);
                 var label:String = dancer.isOnBeat(milliseconds) ? "onbeat" : "offbeat";
                 scene.step.gotoAndPlay(label);
-                scene.step.x = x;
-                scene.step.y = y;
+                scene.step.x = mousePoint.x;
+                scene.step.y = mousePoint.y;
+                stepDistance(milliseconds, mousePoint);
             }
+        }
+
+        private var mousePoint:Point = new Point();
+        private function stepDistance(milliseconds, mousePoint:Point):void
+        {
+            var label:String = dancer.isNear(milliseconds, mousePoint) ? "near" : "none";
+            scene.step.distance.gotoAndPlay(label);
         }
     }
 }
