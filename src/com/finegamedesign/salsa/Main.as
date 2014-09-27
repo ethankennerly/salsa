@@ -48,16 +48,19 @@ package com.finegamedesign.salsa
 
         private function update(e:Event):void
         {
-            updateStep();
-            dancer.update(midi.driver.position);
+            var now:int = midi.driver.position;
+            keyMouse.update();
+            updateStep(now);
+            dancer.update(now);
         }
 
-        private function updateStep():void
+        private function updateStep(milliseconds:int):void
         {
             if (keyMouse.justPressed("MOUSE")) {
                 var x:int = Math.round(keyMouse.target.mouseX);
                 var y:int = Math.round(keyMouse.target.mouseY);
-                scene.step.gotoAndPlay(1);
+                var label:String = dancer.isOnBeat(milliseconds) ? "onbeat" : "offbeat";
+                scene.step.gotoAndPlay(label);
                 scene.step.x = x;
                 scene.step.y = y;
             }

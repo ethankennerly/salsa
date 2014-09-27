@@ -40,6 +40,30 @@ package com.finegamedesign.salsa
         }
 
         /**
+         * @return Fraction of beat off in range: [-0.5..0.5)
+         *          Compensates for half frame lag.
+         */
+        private function getBeatOffset(milliseconds:int):Number
+        {
+            var beat:Number = (milliseconds - halfFrameMilliseconds)
+                / millisecondPerBeat;
+            var offset:Number = beat - Math.round(beat);
+            return offset;
+        }
+
+        internal function isOnBeat(milliseconds:int):Boolean
+        {
+            var threshold:Number = // 0.125;
+                                   0.2;
+                                   // 0.25;
+            var offset:Number = getBeatOffset(milliseconds);
+            trace("Dancer.isOnBeat: " + offset.toFixed(2) 
+                + " milliseconds " + milliseconds);
+            var off:Number = Math.abs(offset);
+            return off <= threshold;
+        }
+
+        /**
          * @param   diagram     Expects children named left and right on each frame.  Starts from last frame.
          * @return  Array of objects:  {x, y, millisecond}, one per frame, where a left or right foot had moved.  Plays through frames of diagram and returns to previous frame.
          */

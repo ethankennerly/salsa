@@ -1,9 +1,10 @@
 TODO
-	Click on beat, solid shoe; offbeat see translucent shoe.
+	Click:  on beat, blue shoe; offbeat:  red shoe.
 	See number on beat of move in diagram and step.
 	Compare click coordinates to ideal click position.
 	Click left forward near time.  See stars.
 	Select basic step.
+	Read score of timing and footwork.
 	See weight in solid, lightfoot in white.
 	See follower's feet in pink.
 	Click feet to select leader or follower.
