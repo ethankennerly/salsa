@@ -1,12 +1,9 @@
 TODO
-	Click near step.  See star near toe.
-	Select basic step.
 	Read number on beat of move in diagram and step.
 	Read score of timing and footwork.
 	See weight in solid, lightfoot in white.
 	See follower's feet in pink.
 	Click feet to select leader or follower.
-	If on beat, turn on more tracks.
 	gradually fade guide out.
 	Half tempo with guide.
 	Half tempo without guide.
@@ -16,6 +13,8 @@ TODO
 	Full tempo without guide.
 	Full tempo with guide and all instruments.
 	Full tempo with all instruments.
+	Change BPM.
+	If on beat, turn on more tracks.
 	
 
 Sun 09/21/2014 

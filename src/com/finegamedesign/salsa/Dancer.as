@@ -12,8 +12,8 @@ package com.finegamedesign.salsa
         private var bpm:int;
         private var diagram:MovieClip;
         private var halfFrameMilliseconds:Number;
-        private var millisecondPerBeat:Number;
-        private var millisecondPerSecond:int = 1000;
+        private var millisecondsPerBeat:Number;
+        private var millisecondsPerSecond:int = 1000;
         private var secondPerMinute:int = 60;
         private var schedule:Array;
         private var startMilliseconds:int;
@@ -24,20 +24,21 @@ package com.finegamedesign.salsa
             this.startMilliseconds = getTimer();
             this.bpm = bpm;
             this.diagram = diagram;
-            halfFrameMilliseconds = millisecondPerSecond 
+            halfFrameMilliseconds = millisecondsPerSecond 
                 * (1.0 / frameRate) * 0.5;
-            millisecondPerBeat = millisecondPerSecond 
+            millisecondsPerBeat = millisecondsPerSecond 
                 / (bpm / secondPerMinute);
             beatLength = diagram.totalFrames;
-            schedule = populate(diagram, millisecondPerBeat);
+            schedule = populate(diagram, millisecondsPerBeat);
             diagram.gotoAndStop(beatLength);
         }
 
-        private function getBeat(milliseconds:int):int
+        private function getBeat(milliseconds:int, offset:Number=0.0):int
         {
             return 1 + (
-                (halfFrameMilliseconds + milliseconds) 
-                    / millisecondPerBeat
+                (halfFrameMilliseconds + milliseconds
+                    + offset * millisecondsPerBeat)
+                    / millisecondsPerBeat
                 ) % beatLength;
         }
 
@@ -48,9 +49,18 @@ package com.finegamedesign.salsa
         private function getBeatOffset(milliseconds:int):Number
         {
             var beat:Number = (milliseconds - halfFrameMilliseconds)
-                / millisecondPerBeat;
+                / millisecondsPerBeat;
             var offset:Number = beat - Math.round(beat);
             return offset;
+        }
+
+        internal function getBeatText(milliseconds:int, isOnBeat:Boolean):String
+        {
+            var text:String = "";
+            if (isOnBeat) {
+                text = getBeat(milliseconds, 0.5).toString();
+            }
+            return text;
         }
 
         internal function isNear(milliseconds:int, global:Point):Boolean
@@ -107,7 +117,7 @@ package com.finegamedesign.salsa
          * @param   diagram     Expects children named left and right on each frame.  Starts from last frame.
          * @return  Array of objects:  {x, y, millisecond}, one per frame, where a left or right foot had moved.  Plays through frames of diagram and returns to previous frame.
          */
-        private function populate(diagram:MovieClip, millisecondPerBeat:int):Array
+        private function populate(diagram:MovieClip, millisecondsPerBeat:int):Array
         {
             var currentFrame:int = diagram.currentFrame;
             var beatLength:int = diagram.totalFrames;
@@ -118,7 +128,7 @@ package com.finegamedesign.salsa
                                        y: diagram.right.y}};
             var schedule:Array = [];
             for (var beat:int = 1; beat <= beatLength; beat++) {
-                var step:Object = {millisecond: (beat - 1) * millisecondPerBeat };
+                var step:Object = {millisecond: (beat - 1) * millisecondsPerBeat };
                 diagram.gotoAndStop(beat);
                 for each(var childName:String in childNames) {
                     move(previous, diagram, childName, step);
@@ -129,15 +139,28 @@ package com.finegamedesign.salsa
             return schedule;
         }
 
-        public function update(milliseconds:int)
+        public function update(milliseconds:int):void
         {
             beat = getBeat(milliseconds);
             if (diagram.currentFrame != beat) {
                 var duration:int = getTimer() - this.startMilliseconds;
                 diagram.gotoAndStop(beat);
+                updateText(beat);
                 trace("Dancer.update: beat " + beat 
                     + " milliseconds " + milliseconds
                     + " duration " + duration);
+            }
+        }
+
+        public function updateText(beat:int):void
+        {
+            var step:Object = schedule[beat - 1];
+            for each(var childName:String in childNames) {
+                var text:String = "";
+                if (childName in step) {
+                    diagram[childName].txt.text = text;
+                }
+                diagram[childName].txt.text = text;
             }
         }
     }

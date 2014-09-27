@@ -57,10 +57,12 @@ package com.finegamedesign.salsa
             if (keyMouse.justPressed("MOUSE")) {
                 mousePoint.x = Math.round(keyMouse.target.mouseX);
                 mousePoint.y = Math.round(keyMouse.target.mouseY);
-                var label:String = dancer.isOnBeat(milliseconds) ? "onbeat" : "offbeat";
+                var isOnBeat:Boolean = dancer.isOnBeat(milliseconds);
+                var label:String = isOnBeat ? "onbeat" : "offbeat";
                 scene.step.gotoAndPlay(label);
                 scene.step.x = mousePoint.x;
                 scene.step.y = mousePoint.y;
+                scene.step.foot.txt.text = dancer.getBeatText(milliseconds, isOnBeat);
                 stepDistance(milliseconds, mousePoint);
             }
         }
