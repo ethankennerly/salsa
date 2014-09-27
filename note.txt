@@ -1,8 +1,14 @@
 TODO
 	Click on beat, solid shoe; offbeat see translucent shoe.
+	See number on beat of move in diagram and step.
 	Compare click coordinates to ideal click position.
 	Click left forward near time.  See stars.
 	Select basic step.
+	See weight in solid, lightfoot in white.
+	See follower's feet in pink.
+	Click feet to select leader or follower.
+	If on beat, turn on more tracks.
+	gradually fade guide out.
 	Half tempo with guide.
 	Half tempo without guide.
 	Half tempo with guide and all instruments.
@@ -11,10 +17,6 @@ TODO
 	Full tempo without guide.
 	Full tempo with guide and all instruments.
 	Full tempo with all instruments.
-	See weight in solid, lightfoot in white.
-	See follower's feet in pink.
-	Click feet to select leader or follower.
-	If on beat, turn on more tracks.
 	
 
 Sun 09/21/2014 

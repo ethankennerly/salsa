@@ -35,6 +35,8 @@ package com.finegamedesign.salsa
             midi = new Midi();
             midi.play(midi.salsaBytes);
             scene = new Scene();
+            scene.mouseChildren = false;
+            scene.mouseEnabled = false;
             dancer = new Dancer(scene.diagram, midi.smfData.bpm,
                 stage.frameRate);
             keyMouse = new KeyMouse();
@@ -46,7 +48,19 @@ package com.finegamedesign.salsa
 
         private function update(e:Event):void
         {
+            updateStep();
             dancer.update(midi.driver.position);
+        }
+
+        private function updateStep():void
+        {
+            if (keyMouse.justPressed("MOUSE")) {
+                var x:int = Math.round(keyMouse.target.mouseX);
+                var y:int = Math.round(keyMouse.target.mouseY);
+                scene.step.gotoAndPlay(1);
+                scene.step.x = x;
+                scene.step.y = y;
+            }
         }
     }
 }
