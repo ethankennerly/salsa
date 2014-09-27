@@ -65,7 +65,8 @@ package com.finegamedesign.salsa
 
         internal function isNear(milliseconds:int, global:Point):Boolean
         {
-            var distanceMax:Number = 40.0;
+            var distanceMax:Number = 20.0;
+                                     // 40.0;
                                      // 80.0;
             var local:Point = diagram.globalToLocal(global);
             var near:Boolean = false;
@@ -158,7 +159,7 @@ package com.finegamedesign.salsa
             for each(var childName:String in childNames) {
                 var text:String = "";
                 if (childName in step) {
-                    diagram[childName].txt.text = text;
+                    text = beat.toString();
                 }
                 diagram[childName].txt.text = text;
             }

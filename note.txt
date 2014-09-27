@@ -1,7 +1,5 @@
 TODO
-	Read number on beat of move in diagram and step.
 	Read score of timing and footwork.
-	See weight in solid, lightfoot in white.
 	See follower's feet in pink.
 	Click feet to select leader or follower.
 	gradually fade guide out.
