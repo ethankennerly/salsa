@@ -13,10 +13,12 @@ package com.finegamedesign.salsa
 
     import org.flixel.system.input.KeyMouse;
 
-    public dynamic class Main extends Sprite
+    public final dynamic class Main extends Sprite
     {
         internal var keyMouse:KeyMouse;
+        private var dancer:Dancer;
         private var midi:Midi;
+        private var scene:Scene;
 
         public function Main()
         {
@@ -31,10 +33,19 @@ package com.finegamedesign.salsa
         public function init(event:Event=null):void
         {
             midi = new Midi();
-            midi.play(midi.salsa, 184 * 2);
-            scrollRect = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
+            midi.play(midi.salsaBytes);
+            scene = new Scene();
+            dancer = new Dancer(scene.diagram, midi.smfData.bpm);
             keyMouse = new KeyMouse();
             keyMouse.listen(stage);
+            addEventListener(Event.ENTER_FRAME, update, false, 0, true);
+            scrollRect = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
+            addChild(scene);
+        }
+
+        private function update(e:Event):void
+        {
+            dancer.update(midi.driver.position);
         }
     }
 }

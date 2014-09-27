@@ -1,7 +1,7 @@
 TODO
-	View layout of basic foot positions.
-	Left forward.
-	Basic step.
+	Foot steps in time with 92 bpm.
+	Click left forward near time.  See stars.
+	Select basic step.
 	Half tempo with guide.
 	Half tempo without guide.
 	Half tempo with guide and all instruments.
