@@ -1,5 +1,6 @@
 TODO
-	Foot steps in time with 92 bpm.
+	Click on beat, solid shoe; offbeat see translucent shoe.
+	Compare click coordinates to ideal click position.
 	Click left forward near time.  See stars.
 	Select basic step.
 	Half tempo with guide.
@@ -11,6 +12,9 @@ TODO
 	Full tempo with guide and all instruments.
 	Full tempo with all instruments.
 	See weight in solid, lightfoot in white.
+	See follower's feet in pink.
+	Click feet to select leader or follower.
+	If on beat, turn on more tracks.
 	
 
 Sun 09/21/2014 
@@ -117,4 +121,49 @@ fps = footsteps per second and frames per second.
 92 bpm = 92/60 bps
 
 1.5333 fps
+
+
+
+Sat 09/27/2014 
+11:31
+
+Drift in BPM.
+
+It looks like SMF data varies from MuseScore BPM and that the playback has further drift from the position in the song and timer.  
+Visually, it appears that animation is in sync with this slower BPM.
+
+Midi.play: smfData format : SMF1
+numTracks : 14
+resolution : 480
+title : 
+author : 
+signature : 4/4
+BPM : 21
+Dancer.update: beat 1 milliseconds 0 duration 64
+Dancer.update: beat 2 milliseconds 2832 duration 2893
+Dancer.update: beat 3 milliseconds 5712 duration 5786
+Dancer.update: beat 4 milliseconds 8544 duration 8620
+Dancer.update: beat 5 milliseconds 11424 duration 11490
+Dancer.update: beat 6 milliseconds 14257 duration 14322
+Dancer.update: beat 7 milliseconds 17136 duration 17197
+Dancer.update: beat 8 milliseconds 19969 duration 20119
+Dancer.update: beat 1 milliseconds 22848 duration 23012
+Dancer.update: beat 2 milliseconds 25681 duration 25847
+Dancer.update: beat 3 milliseconds 28560 duration 28718
+Dancer.update: beat 4 milliseconds 31439 duration 31598
+Dancer.update: beat 5 milliseconds 34272 duration 34425
+Dancer.update: beat 6 milliseconds 37151 duration 37313
+Dancer.update: beat 7 milliseconds 39984 duration 40145
+Dancer.update: beat 8 milliseconds 42864 duration 43029
+Dancer.update: beat 1 milliseconds 45696 duration 45846
+Dancer.update: beat 2 milliseconds 48576 duration 48746
+Dancer.update: beat 3 milliseconds 51408 duration 51579
+Dancer.update: beat 4 milliseconds 54288 duration 54449
+Dancer.update: beat 5 milliseconds 57121 duration 57277
+Dancer.update: beat 6 milliseconds 60000 duration 60158
+Dancer.update: beat 7 milliseconds 62833 duration 62982
+Dancer.update: beat 8 milliseconds 65712 duration 65887
+Dancer.update: beat 1 milliseconds 68545 duration 68712
+Dancer.update: beat 2 milliseconds 71424 duration 71582
+Dancer.update: beat 3 milliseconds 74257 duration 74424
 

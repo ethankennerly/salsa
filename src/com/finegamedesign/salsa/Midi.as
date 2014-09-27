@@ -26,9 +26,7 @@ package com.finegamedesign.salsa
         {
             smfData.loadBytes(bytes);
             driver.play(smfData);
-            if (1 <= bpm) {
-                driver.bpm = bpm;
-            }
+            trace("Midi.play: smfData " + smfData.toString());
             return driver;
         }
     }
