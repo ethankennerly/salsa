@@ -9,7 +9,6 @@ package com.finegamedesign.salsa
         private var beat:int;
         private var beatLength:int;
         private var childNames:Array = ["left", "right"];
-        private var bpm:int;
         private var diagram:MovieClip;
         private var halfFrameMilliseconds:Number;
         private var millisecondsPerBeat:Number;
@@ -22,15 +21,19 @@ package com.finegamedesign.salsa
                 frameRate:Number)
         {   
             this.startMilliseconds = getTimer();
-            this.bpm = bpm;
             this.diagram = diagram;
             halfFrameMilliseconds = millisecondsPerSecond 
                 * (1.0 / frameRate) * 0.5;
-            millisecondsPerBeat = millisecondsPerSecond 
-                / (bpm / secondPerMinute);
+            this.bpm = bpm;
             beatLength = diagram.totalFrames;
-            schedule = populate(diagram, millisecondsPerBeat);
             diagram.gotoAndStop(beatLength);
+        }
+
+        internal function set bpm(value:int):void
+        {
+            millisecondsPerBeat = millisecondsPerSecond 
+                / (value / secondPerMinute);
+            schedule = populate(diagram, millisecondsPerBeat);
         }
 
         private function getBeat(milliseconds:int, offset:Number=0.0):int
@@ -83,8 +86,7 @@ package com.finegamedesign.salsa
                 }
             }
             near = distance <= distanceMax;
-            trace("Dancer.isNear: " + near
-                + " distance " + distance);
+            // trace("Dancer.isNear: " + near + " distance " + distance);
             return near;
         }
 
@@ -94,8 +96,7 @@ package com.finegamedesign.salsa
                                    0.2;
                                    // 0.25;
             var offset:Number = getBeatOffset(milliseconds);
-            trace("Dancer.isOnBeat: " + offset.toFixed(2) 
-                + " milliseconds " + milliseconds);
+            // trace("Dancer.isOnBeat: " + offset.toFixed(2) + " milliseconds " + milliseconds);
             var off:Number = Math.abs(offset);
             return off <= threshold;
         }
@@ -147,9 +148,7 @@ package com.finegamedesign.salsa
                 var duration:int = getTimer() - this.startMilliseconds;
                 diagram.gotoAndStop(beat);
                 updateText(beat);
-                trace("Dancer.update: beat " + beat 
-                    + " milliseconds " + milliseconds
-                    + " duration " + duration);
+                // trace("Dancer.update: beat " + beat + " milliseconds " + milliseconds + " duration " + duration);
             }
         }
 

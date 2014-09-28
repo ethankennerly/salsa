@@ -1,5 +1,6 @@
 TODO
 	Read score of timing and footwork.
+	Change BPM.
 	See follower's feet in pink.
 	Click feet to select leader or follower.
 	gradually fade guide out.
@@ -11,7 +12,6 @@ TODO
 	Full tempo without guide.
 	Full tempo with guide and all instruments.
 	Full tempo with all instruments.
-	Change BPM.
 	If on beat, turn on more tracks.
 	
 
