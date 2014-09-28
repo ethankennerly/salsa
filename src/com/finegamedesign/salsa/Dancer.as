@@ -141,7 +141,7 @@ package com.finegamedesign.salsa
             return schedule;
         }
 
-        public function update(milliseconds:int):void
+        public function update(milliseconds:int):int
         {
             beat = getBeat(milliseconds);
             if (diagram.currentFrame != beat) {
@@ -149,7 +149,9 @@ package com.finegamedesign.salsa
                 diagram.gotoAndStop(beat);
                 updateText(beat);
                 // trace("Dancer.update: beat " + beat + " milliseconds " + milliseconds + " duration " + duration);
+                return beat;
             }
+            return -1;
         }
 
         public function updateText(beat:int):void

@@ -31,7 +31,7 @@ package com.finegamedesign.salsa
 
         internal function set bpm(value:int):void
         {
-            overrideBpm = value;
+            overrideBpm = Math.max(20, Math.min(250, value));
         }
 
         // http://stackoverflow.com/questions/2035948/play-midi-files-in-flash

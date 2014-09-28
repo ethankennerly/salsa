@@ -18,6 +18,7 @@ package com.finegamedesign.salsa
         private var dancer:Dancer;
         private var midi:Midi;
         private var scene:Scene;
+        private var selectedDiagram:MovieClip;
 
         public function Main()
         {
@@ -34,8 +35,8 @@ package com.finegamedesign.salsa
             midi = new Midi();
             midi.play(midi.salsaBytes);
             scene = new Scene();
-            scene.bone.diagram.mouseChildren = false;
-            scene.bone.diagram.mouseEnabled = false;
+            scene.bone.mouseChildren = false;
+            scene.bone.mouseEnabled = false;
             scene.step.mouseChildren = false;
             scene.step.mouseEnabled = false;
             scene.togglePlay.addEventListener(MouseEvent.CLICK, midi.togglePlay, false, 0, true);
@@ -46,6 +47,7 @@ package com.finegamedesign.salsa
             scene.sequence.addItem({label: "LeftTurn", diagram: new LeftTurn()});
             scene.sequence.addItem({label: "RightTurn", diagram: new RightTurn()});
             scene.sequence.addEventListener(Event.CHANGE, selectSequence, false, 0, true);
+            scene.sequence.selectedIndex = 0;
             dancer = new Dancer(scene.bone.diagram, midi.smfData.bpm,
                 stage.frameRate);
             keyMouse = new KeyMouse();
@@ -56,15 +58,15 @@ package com.finegamedesign.salsa
             addChild(scene);
         }
 
-        private function bpmDown(event:Event):void
+        private function bpmDown(event:MouseEvent):void
         {
-            bpmAdjust(midi.bpm + 10);
+            bpmAdjust(midi.bpm - 10);
             event.stopPropagation();
         }
 
-        private function bpmUp(event:Event):void
+        private function bpmUp(event:MouseEvent):void
         {
-            bpmAdjust(midi.bpm - 10);
+            bpmAdjust(midi.bpm + 10);
             event.stopPropagation();
         }
 
@@ -74,16 +76,18 @@ package com.finegamedesign.salsa
             dancer.bpm = bpm;
         }
 
-        private function selectSequence(e:Event):void
+        private function selectSequence(event:Event):void
         {
-            var diagram:MovieClip = e.currentTarget.selectedItem.diagram;
-            setSequence(diagram);
+            selectedDiagram = event.currentTarget.selectedItem.diagram;
+            event.stopPropagation();
         }
 
         private function setSequence(diagram:MovieClip):void
         {
             replace(scene.bone.diagram, diagram);
             diagram.gotoAndStop(scene.bone.diagram.currentFrame);
+            diagram.left.txt.text = scene.bone.diagram.left.txt.text;
+            diagram.right.txt.text = scene.bone.diagram.right.txt.text;
             scene.bone.diagram = diagram;
             dancer = new Dancer(scene.bone.diagram, midi.bpm,
                 stage.frameRate);
@@ -104,7 +108,11 @@ package com.finegamedesign.salsa
             var now:int = midi.driver.position;
             keyMouse.update();
             updateStep(now);
-            dancer.update(now);
+            var nextBeat:int = dancer.update(now);
+            if (7 == nextBeat && null != selectedDiagram) {
+                setSequence(selectedDiagram);
+                selectedDiagram = null;
+            }
             midi.update();
             scene.bpmText.text = midi.bpm.toString();
         }
@@ -114,6 +122,9 @@ package com.finegamedesign.salsa
             if (keyMouse.justPressed("MOUSE")) {
                 mousePoint.x = Math.round(keyMouse.target.mouseX);
                 mousePoint.y = Math.round(keyMouse.target.mouseY);
+                if (mousePoint.y < 100) {
+                    return;
+                }
                 var isOnBeat:Boolean = dancer.isOnBeat(milliseconds);
                 var label:String = isOnBeat ? "onbeat" : "offbeat";
                 scene.step.gotoAndPlay(label);
