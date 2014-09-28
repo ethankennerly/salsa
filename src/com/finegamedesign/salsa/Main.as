@@ -43,6 +43,8 @@ package com.finegamedesign.salsa
             scene.bpmUp.addEventListener(MouseEvent.CLICK, bpmUp, false, 0, true);
             scene.bpmText.text = midi.bpm.toString();
             scene.sequence.addItem({label: "BasicStep", diagram: new BasicStep()});
+            scene.sequence.addItem({label: "LeftTurn", diagram: new LeftTurn()});
+            scene.sequence.addItem({label: "RightTurn", diagram: new RightTurn()});
             scene.sequence.addEventListener(Event.CHANGE, selectSequence, false, 0, true);
             dancer = new Dancer(scene.bone.diagram, midi.smfData.bpm,
                 stage.frameRate);
